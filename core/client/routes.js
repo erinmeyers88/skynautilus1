@@ -19,6 +19,6 @@ angular.module("skyNautilus")
 				}
 			});
 		
-		$urlRouterProvider.otherwise("/");
+		$urlRouterProvider.otherwise("/home");
 		
 	});
