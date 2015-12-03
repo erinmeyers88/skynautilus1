@@ -31,11 +31,11 @@ module.exports = function () {
     app.use(methodOverride());
 
     // cookies and session
-    app.use(session({
-        saveUninitialized: true,
-        resave: true,
-        secret: config.sessionSecret
-    }));
+    // app.use(session({
+    //     saveUninitialized: true,
+    //     resave: true,
+    //     secret: config.sessionSecret
+    // }));
 
 
     // MIDDLEWARE THAT RUNS ONLY IN DEVELOPMENT
