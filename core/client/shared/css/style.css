@@ -350,7 +350,7 @@ datepicker input {
 
 /*Save Trip Modal*/
 #overlay {
-     visibility: visible;
+     visibility: hidden; 
      position: absolute;
      left: 0px;
      top: 0px;
@@ -393,6 +393,7 @@ datepicker input {
   border: 1px solid #E5E5E5;
   height: 25px;
   width: 150px;
+  padding: 0;
 }
 
 
@@ -401,7 +402,17 @@ datepicker input {
    flex-direction: column
 }
 
-
+.tripNameInputField {
+    color: black;
+    height: 25px;
+    width: 150px;
+    border-radius: 5px;
+    margin-top: 7px;
+    border: 1px solid #E5E5E5;
+    background: #FBFBFB;
+    font: normal 14px/14px Arial, Helvetica, sans-serif;
+    text-align: center;
+}
 
 .modalButtons {
     display: flex;

@@ -6,7 +6,7 @@ angular.module("skyNautilus")
 		this.addTrip = function (trip) {
 			return $http ({
 				method: "POST",
-				url: "/api/hats",
+				url: "/api/trips",
 				data: trip
 			}).then(function (response) {
 				return response.data;

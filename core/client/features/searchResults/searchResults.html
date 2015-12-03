@@ -152,7 +152,7 @@
 			<div class="buttonWrapper">
 				<div class="column saveButtonDiv">
 					<div class="fakeLabel"></div>
-					<input type="button" class="saveButton" value="Save to&#13;&#10;Trips" ng-click="showHideModal()" />
+					<input type="button" class="saveButton" value="Save to&#13;&#10;Trips" ng-click="showHideModal(); setSelectedItinerary(item)"/>
 				</div>
 			</div>
 
@@ -161,6 +161,8 @@
 
 		</div>
 
+
+<!---------------Filter-------------------->
 
 
 		<div class="filterWrapper">
@@ -200,22 +202,24 @@
 		<div class="chooseTrip">
 			<div class="modalLabel">Choose Trip</div>
 			<label>
-				<select name="selection" type="number" ng-model="passengerCount"></select>
+				<select name="selection" type="number" ng-model="tripName"></select>
 			</label>
 		</div>
 
-		<div class="modalButton">NEW TRIP</div>
-
-		<label class="tripNameInput" ng-show="">
+		<div class="modalButton" ng-click="newTripInputShown = !newTripInputShown">NEW TRIP</div>
+		
+		
+		
+		<label class="tripNameInput" ng-show="newTripInputShown">
 			<span class="modalLabel">Trip Name:</span>
-			<input list="airports" type="string" ng-model="destination" class="destination" />
+			<input type="string" ng-model="tripName" class="tripNameInputField" />
 		</label>
 
 
 
 		<div class="modalButtons">
 			<div class="modalButton" ng-click="showHideModal()">CANCEL</div>
-			<div class="modalButton">SAVE</div>
+			<div class="modalButton" ng-click="addTrip()">SAVE</div>
 		</div>
 
 	</div>

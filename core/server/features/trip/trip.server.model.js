@@ -4,22 +4,20 @@ var TripModel = mongoose.Schema({
 	
 	name: {type: String, required: true},
 	itineraries : [{
-		
-		saleTotal: {type: Number},
+		saleTotal: {type: String},
 		slice: [{
-			duration: {type: Number},
 			segment: [{
-				duration: {type: Number},
+				cleanDuration: {type: String},
 				flight: {
 					carrier: {type: String},
-					number: {type: Number}
+					number: {type: String}
 				},
 				leg: [{
-					arrivalTime: {type: Date},
-					departureTime: {type: Date,},
-					destination: {type: String,},
-					duration: {type: Number,},
-					origin: {type: String,}	
+					cleanArrivalTime: {type: Date},
+					cleanDepartureTime: {type: Date},
+					destination: {type: String},
+					cleanDuration: {type: String},
+					origin: {type: String}	
 				}]
 			}]
 		}]	
