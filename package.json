@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "dependencies": {
-    "angularjs-datepicker": "^0.2.13",
+    "angularjs-datepicker": "^0.2.15",
     "body-parser": "^1.14.1",
     "cors": "^2.7.1",
     "express": "^4.13.3",
