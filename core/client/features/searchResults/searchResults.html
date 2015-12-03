@@ -56,11 +56,17 @@
 
 						<div class="column">
 							<div class="label">Duration</div>
-							<div class="tripLabel" ng-show="isShown('roundtrip')"><br></div>
+							<div class="tripLabel" ng-show="isShown('roundtrip')">
+								<br>
+							</div>
 							<div ng-repeat="segment in item.slice[0].segment">
-								<div class="secondRow"><br></div>
-								<div ng-repeat="leg in segment.leg" class="thirdRow">{{leg.cleanDuration}}</div>	
-								<div class="fourthRow"><br></div>
+								<div class="secondRow">
+									<br>
+								</div>
+								<div ng-repeat="leg in segment.leg" class="thirdRow">{{leg.cleanDuration}}</div>
+								<div class="fourthRow">
+									<br>
+								</div>
 							</div>
 						</div>
 
@@ -109,16 +115,22 @@
 						</div>
 
 						<div class="column">
-							<div class="tripLabel"><br></div>
+							<div class="tripLabel">
+								<br>
+							</div>
 							<div ng-repeat="segment in item.slice[1].segment">
-								<div class="secondRow"><br></div>
+								<div class="secondRow">
+									<br>
+								</div>
 								<div ng-repeat="leg in segment.leg" class="thirdRow">{{leg.cleanDuration}}</div>
-								<div class="fourthRow"><br></div>
+								<div class="fourthRow">
+									<br>
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-				
+
 				<div class="rightSection">
 					<div class="column" ng-repeat="pricing in item.pricing">
 						<div class="label">Passengers</div>
@@ -140,7 +152,7 @@
 			<div class="buttonWrapper">
 				<div class="column saveButtonDiv">
 					<div class="fakeLabel"></div>
-					<input type="button" class="saveButton" value="Save to&#13;&#10;Trips" />
+					<input type="button" class="saveButton" value="Save to&#13;&#10;Trips" ng-click="showHideModal()" />
 				</div>
 			</div>
 
@@ -174,6 +186,36 @@
 				</div>
 
 			</div>
+		</div>
+
+	</div>
+</div>
+
+
+<!---------------------Save to Trip Modal------------------------->
+
+<div id="overlay">
+	<div class="overlayInside">
+
+		<div class="chooseTrip">
+			<div class="modalLabel">Choose Trip</div>
+			<label>
+				<select name="selection" type="number" ng-model="passengerCount"></select>
+			</label>
+		</div>
+
+		<div class="modalButton">NEW TRIP</div>
+
+		<label class="tripNameInput" ng-show="">
+			<span class="modalLabel">Trip Name:</span>
+			<input list="airports" type="string" ng-model="destination" class="destination" />
+		</label>
+
+
+
+		<div class="modalButtons">
+			<div class="modalButton" ng-click="showHideModal()">CANCEL</div>
+			<div class="modalButton">SAVE</div>
 		</div>
 
 	</div>

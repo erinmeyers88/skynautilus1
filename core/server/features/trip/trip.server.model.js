@@ -30,3 +30,6 @@ var TripModel = mongoose.Schema({
 	
 	
 module.exports = mongoose.model("trip", TripModel);
+
+
+
