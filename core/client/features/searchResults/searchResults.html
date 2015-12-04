@@ -4,12 +4,12 @@
 <div class="pageWrapper">
 
 	<div class="modifySearch">
-		<input type="button" class="modifySearchButton" value="Modify Search" />
+		<input type="button" class="modifySearchButton" value="Modify Search" ng-click="getUserSearch()"/>
 	</div>
 
-	<div class="listWrapper">
+	<div class="listWrapper" ng-repeat="listing in searchResults.flightListings">
 
-		<div class="searchResultsListing" ng-repeat="item in searchResults.tripOption">
+		<div class="searchResultsListing" ng-repeat="item in listing.tripOption">
 			<div class="whiteBackground">
 				<div class="dataWrapper">
 					<!--OUTBOUND---------------------------------------------------------------->
@@ -151,7 +151,6 @@
 
 			<div class="buttonWrapper">
 				<div class="column saveButtonDiv">
-					<div class="fakeLabel"></div>
 					<input type="button" class="saveButton" value="Save to&#13;&#10;Trips" ng-click="showHideModal(); setSelectedItinerary(item)"/>
 				</div>
 			</div>

@@ -1,29 +1,24 @@
 angular.module("skyNautilus")
   .controller("searchResultsCtrl", function ($scope, flightSearchService, tripService, loadResults) {
     
-    //Retreive user search to be able to repopulate the modify search form 
-    $scope.getUserSearch = function () {
-      $scope.userSearch = flightSearchService.saveSearchData();
-    };
-    
-    
-    
     //Loads the search results from the API call, sets trip type
-    $scope.getSearchData = function () {
-      $scope.searchData = loadResults;
-      $scope.searchResults = $scope.searchData.searchResults;
-      $scope.cities = $scope.searchData.cities;
-      $scope.airlines = $scope.searchData.airlines;
-
-      $scope.tripType = flightSearchService.getTripType();
-    } ();
-
-
+    $scope.getsearchResults = function () {
+      $scope.searchResults = loadResults;
+    }();
+    
+    console.log($scope.searchResults);
+    
     //Determines whether to show depart and return labels
     $scope.isShown = function (tripType) {
-      return tripType === $scope.tripType;
+      return tripType === $scope.searchResults.tripType;
     };
-
+    
+    
+    //Retreive user search to be able to repopulate the modify search form 
+    $scope.getUserSearch = function () {
+      $scope.userSearch = flightSearchService.getUserInput();
+    };
+    
 
     //Shows or hides save trip modal
 
@@ -55,39 +50,39 @@ angular.module("skyNautilus")
 
       $scope.itineraryToSave.name = $scope.tripName;
 
-      delete $scope.selectedItinerary.$$hashKey;
-      delete $scope.selectedItinerary.id;
-      delete $scope.selectedItinerary.kind;
-      delete $scope.selectedItinerary.pricing;
-      $scope.selectedItinerary.slice.forEach(function (item) {
-        delete item.kind;
-        delete item.duration;
-        item.segment.forEach(function (item2) {
-          delete item2.$$hashKey;
-          delete item2.bookingCode;
-          delete item2.bookingCodeCount;
-          delete item2.cabin;
-          delete item2.connectionDuration;
-          delete item2.duration;
-          delete item2.id;
-          delete item2.kind;
-          delete item2.marriedSegmentGroup;
-          item2.leg.forEach(function (item3) {
-            delete item3.$$hashKey;
-            delete item3.aircraft;
-            delete item3.arrivalTime;
-            delete item3.departureTime;
-            delete item3.destinationTerminal;
-            delete item3.meal;
-            delete item3.duration;
-            delete item3.id;
-            delete item3.kind;
-            delete item3.mileage;
-            delete item3.onTimePerformance;
-            delete item3.secure;
-          });
-        });
-      });
+      // delete $scope.selectedItinerary.$$hashKey;
+      // delete $scope.selectedItinerary.id;
+      // delete $scope.selectedItinerary.kind;
+      // delete $scope.selectedItinerary.pricing;
+      // $scope.selectedItinerary.slice.forEach(function (item) {
+      //   delete item.kind;
+      //   delete item.duration;
+      //   item.segment.forEach(function (item2) {
+      //     delete item2.$$hashKey;
+      //     delete item2.bookingCode;
+      //     delete item2.bookingCodeCount;
+      //     delete item2.cabin;
+      //     delete item2.connectionDuration;
+      //     delete item2.duration;
+      //     delete item2.id;
+      //     delete item2.kind;
+      //     delete item2.marriedSegmentGroup;
+      //     item2.leg.forEach(function (item3) {
+      //       delete item3.$$hashKey;
+      //       delete item3.aircraft;
+      //       delete item3.arrivalTime;
+      //       delete item3.departureTime;
+      //       delete item3.destinationTerminal;
+      //       delete item3.meal;
+      //       delete item3.duration;
+      //       delete item3.id;
+      //       delete item3.kind;
+      //       delete item3.mileage;
+      //       delete item3.onTimePerformance;
+      //       delete item3.secure;
+      //     });
+      //   });
+      // });
 
       $scope.itineraryToSave.itineraries = [];
       $scope.itineraryToSave.itineraries.push($scope.selectedItinerary);

@@ -2,140 +2,50 @@ angular.module("skyNautilus")
 
   .controller("homeCtrl", function ($scope, flightSearchService, $state) {
 	
-    //Toggle oneway or roundtrip search option display
+    //Toggles oneway or roundtrip search option display
     $scope.tripType = "roundtrip";
 
     $scope.isShown = function (tripType) {
       return tripType === $scope.tripType;
     };
   
-////////////Request bodies////////////////////////////////////////
-	
+    //Creates user input object
   
-    //One Way/////////////////////////////
-    $scope.populateSearch = function () {
-
-      $scope.passengerCount = Number($scope.passengerCount);
-
-      $scope.onewayRequestBody = {
-        request: {
-          passengers: {
-            kind: "qpxexpress#passengerCounts",
-            adultCount: $scope.passengerCount,
-            childCount: 0,
-            infantInLapCount: 0,
-            infantInSeatCount: 0,
-            seniorCount: 0
-          },
-          slice: [
-            {
-              kind: "qpxexpress#sliceInput",
-              origin: "PDX",
-              destination: $scope.destination,
-              date: $scope.departureDate,
-              maxStops: 10,
-              maxConnectionDuration: 1440,
-              preferredCabin: "",
-              permittedDepartureTime: {
-                kind: "qpxexpress#timeOfDayRange",
-                earliestTime: "",
-                latestTime: ""
-              },
-              permittedCarrier: [""],
-              alliance: "",
-              prohibitedCarrier: [""]
-            }
-          ],
-          maxPrice: "",
-          saleCountry: "",
-          refundable: "",
-          solutions: 50
-        }
+    $scope.createUserInputObject = function () {
+      $scope.userInput = {
+        tripType: $scope.tripType,
+        passengerCount: Number($scope.passengerCount),
+        destination: $scope.destination,
+        departureDate: $scope.departureDate,
+        returnDate: $scope.returnDate,
       };
-	
-  
-      //Round Trip////////////////////////////////////////////
-      $scope.roundtripRequestBody = {
-        request: {
-          passengers: {
-            kind: "qpxexpress#passengerCounts",
-            adultCount: $scope.passengerCount,
-            childCount: 0,
-            infantInLapCount: 0,
-            infantInSeatCount: 0,
-            seniorCount: 0
-          },
-           slice: [
-            {
-              kind: "qpxexpress#sliceInput",
-              origin: "PDX",
-              destination: $scope.destination,
-              date: $scope.departureDate,
-              maxStops: 10,
-              maxConnectionDuration: 1440,
-              preferredCabin: "",
-              permittedDepartureTime: {
-                kind: "qpxexpress#timeOfDayRange",
-                earliestTime: "",
-                latestTime: ""
-              },
-              permittedCarrier: [""],
-              alliance: "",
-              prohibitedCarrier: [""]
-            },
-             {
-              kind: "qpxexpress#sliceInput",
-              origin: $scope.destination,
-              destination: "PDX",
-              date: $scope.returnDate,
-              maxStops: 10,
-              maxConnectionDuration: 1440,
-              preferredCabin: "",
-              permittedDepartureTime: {
-                kind: "qpxexpress#timeOfDayRange",
-                earliestTime: "",
-                latestTime: ""
-              },
-              permittedCarrier: [""],
-              alliance: "",
-              prohibitedCarrier: [""]
-            }
-          ],
-          maxPrice: "",
-          saleCountry: "",
-          refundable: "",
-          solutions: 50
-        }
-      };
-    };   
-    
-    
-    //Search function///////////////////////////////////////////////////////////
-    $scope.getSearchResults = function () {
-      if ($scope.tripType === "oneway") {
-        JSON.stringify($scope.onewayRequestBody);
-        flightSearchService.saveSearchData($scope.onewayRequestBody);
-        flightSearchService.setTripType($scope.tripType);
-        } else {
-        JSON.stringify($scope.roundtripRequestBody);
-        flightSearchService.saveSearchData($scope.roundtripRequestBody);
-        flightSearchService.setTripType($scope.tripType);
-      }
     };
+  
+  
+    //Saves user input object to service
+    $scope.saveUserInputObject = function () {
+      flightSearchService.saveUserInput($scope.userInput);
+    };
+    
     
     //Change to search results view///
-    $scope.goToSearchResults = function () {
-      $state.go("searchresults", {});
-      console.log("Changing states");
+		$scope.goToSearchResults = function () {
+			$state.go("searchresults");
+			console.log("Changing states");
+		};
+
+    //Search
+    
+    $scope.search = function () {
+      $scope.createUserInputObject();
+      $scope.saveUserInputObject();
+      flightSearchService.search();
+      $scope.goToSearchResults();
     };
     
-   //Variables///////////////////////     
-   $scope.searchResults = flightSearchService.searchResults;
-   $scope.airlines = flightSearchService.airlines;
-   $scope.cities = flightSearchService.cities;     
-  
-
-});
+   
+    
+  });
 
 
 

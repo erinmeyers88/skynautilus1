@@ -1,9 +1,10 @@
-body {
+html, body {
 	margin: 0;
 	padding: 0;
 	height: auto;
 	width: 100%;
- 
+    position: relative;
+    min-width: 1280px;
 }
 
 
@@ -364,9 +365,11 @@ datepicker input {
 }
 
 .overlayInside {
-     width:400px;
+     width: 500px;
      height: 300px;
-     margin: 200px auto;
+     position: absolute;
+     top: 200px;
+     margin: 0 auto;
      background-color: #fff;
      border: 5px solid rgb(0, 0, 128);
      border-radius: 5px;
@@ -441,6 +444,8 @@ datepicker input {
 	justify-content: center;
 }
 
+/*---Modify search button-----------*/
+
 .pageWrapper {
 	width: 100%;
 	margin: 0;
@@ -479,8 +484,11 @@ datepicker input {
 	background-color:#0000cc;
 }
 
+/*---Results listing-----------*/
+
 .listWrapper {
-	width: 65%;
+	max-width: 70%;
+    min-width: 70%;
 	height: 100%;
 	position: relative;
 	left: 50px;
@@ -499,7 +507,8 @@ datepicker input {
 	border-radius: 5px;
 	background-color: white;
 	opacity: .9;
-    width: 100%;
+    max-width: 780px;
+    min-width: 780px;
     display: flex;
     flex-direction: row;
     position: relative;
@@ -517,11 +526,39 @@ datepicker input {
 }
 
 .buttonWrapper {
-    width: 10%;
+    width: 20%;
     margin-bottom: 15px;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+
+.saveButtonDiv {
+	text-align: center;
+	width: 100%;
+	justify-content: center;
+}
+
+.saveButton {
+	height: 50px;
+	width: 80px;
+	border-radius: 5px;
+	margin: 0 auto;
+	background-color:#000080;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-border-radius: 5px;
+    border: 1px solid #fff;
+    color: #FFF;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+
+.saveButton:hover {
+	background-color:#0000cc;
 }
 
 .column {
@@ -600,11 +637,7 @@ datepicker input {
 	font-size: 20px;
 }
 
-.saveButtonDiv {
-	text-align: center;
-	width: 100px;
-	justify-content: center;
-}
+
 
 
 .fakelabel {
@@ -616,26 +649,7 @@ datepicker input {
 	border-right: 1px solid white;
 }
 
-.saveButton {
-	height: 50px;
-	width: 80px;
-	border-radius: 5px;
-	margin: 0 auto;
-	background-color:#000080;
-    border-radius: 5px;
-    -webkit-border-radius: 5px;
-    -moz-border-border-radius: 5px;
-    border: 1px solid #fff;
-    color: #FFF;
-    font-size: 14px;
-    margin-top: 10px;
-    margin-left: 10px;
-}
 
-
-.saveButton:hover {
-	background-color:#0000cc;
-}
 
 div p {
 	line-height: 20px;
