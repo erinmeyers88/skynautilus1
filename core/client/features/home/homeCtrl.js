@@ -11,15 +11,15 @@ angular.module("skyNautilus")
   
     //Creates user input object
   
-    $scope.createUserInputObject = function () {
-      $scope.userInput = {
-        tripType: $scope.tripType,
-        passengerCount: Number($scope.passengerCount),
-        destination: $scope.destination,
-        departureDate: $scope.departureDate,
-        returnDate: $scope.returnDate,
-      };
-    };
+    // $scope.createUserInputObject = function () {
+    //   $scope.userInput = {
+    //     tripType: $scope.tripType,
+    //     passengerCount: Number($scope.passengerCount),
+    //     destination: $scope.destination,
+    //     departureDate: $scope.departureDate,
+    //     returnDate: $scope.returnDate,
+    //   };
+    // };
   
   
     //Saves user input object to service
@@ -37,7 +37,7 @@ angular.module("skyNautilus")
     //Search
     
     $scope.search = function () {
-      $scope.createUserInputObject();
+      // $scope.createUserInputObject();
       $scope.saveUserInputObject();
       flightSearchService.search();
       $scope.goToSearchResults();
