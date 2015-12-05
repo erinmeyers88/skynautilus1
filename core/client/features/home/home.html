@@ -38,7 +38,7 @@
             </label>
 
 
-            <label ng-show="isShown('roundtrip')">
+            <label ng-show="showReturnDate()">
                 <span>Return:</span>
                 <datepicker date-year-title="selected title" date-format="yyyy-MM-dd">
                     <input type="string" ng-model="userInput.returnDate" class="date"/>
@@ -49,7 +49,7 @@
         <div class="passengerInput">
             <label>
                 <span>Passengers:</span>
-                <select name="selection" ng-model="Number(userInput.passengerCount)">
+                <select name="selection" ng-model="userInput.passengerCount">
                     <option value=1>1</option>
                     <option value=2>2</option>
                     <option value=3>3</option>

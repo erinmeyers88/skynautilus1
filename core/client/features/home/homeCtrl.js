@@ -1,52 +1,25 @@
-angular.module("skyNautilus")
+angular.module("skyNautilus").controller("homeCtrl", HomeController);
 
-  .controller("homeCtrl", function ($scope, flightSearchService, $state) {
+function HomeController ($scope, flightSearchService, $state) {
 	
+    $scope.userInput = {};
+  
     //Toggles oneway or roundtrip search option display
-    $scope.tripType = "roundtrip";
+    $scope.userInput.tripType = "roundtrip";
 
-    $scope.isShown = function (tripType) {
-      return tripType === $scope.tripType;
-    };
-  
-    //Creates user input object
-  
-    // $scope.createUserInputObject = function () {
-    //   $scope.userInput = {
-    //     tripType: $scope.tripType,
-    //     passengerCount: Number($scope.passengerCount),
-    //     destination: $scope.destination,
-    //     departureDate: $scope.departureDate,
-    //     returnDate: $scope.returnDate,
-    //   };
-    // };
-  
-  
-    //Saves user input object to service
-    $scope.saveUserInputObject = function () {
-      flightSearchService.saveUserInput($scope.userInput);
+    $scope.showReturnDate = function () {
+      return $scope.userInput.tripType === 'roundtrip';
     };
     
+    //Search
+    $scope.search = function () {
+      flightSearchService.search($scope.userInput);
+      // $scope.goToSearchResults();
+    };
     
     //Change to search results view///
 		$scope.goToSearchResults = function () {
 			$state.go("searchresults");
 			console.log("Changing states");
 		};
-
-    //Search
-    
-    $scope.search = function () {
-      // $scope.createUserInputObject();
-      $scope.saveUserInputObject();
-      flightSearchService.search();
-      $scope.goToSearchResults();
-    };
-    
-   
-    
-  });
-
-
-
- 
+  }
