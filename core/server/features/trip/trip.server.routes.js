@@ -5,7 +5,7 @@ module.exports = function (app) {
 
 	app.route("/api/trips")
 		.post(Ctrl.addTrip);
-	// 	.get(Ctrl.getTrips)
+		// .get(Ctrl.getTrips);
 	// 	.delete(Ctrl.deleteTrip);
 	
 	// app.route("/api/trips/:id")

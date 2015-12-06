@@ -7,9 +7,9 @@
 		<input type="button" class="modifySearchButton" value="Modify Search" ng-click="getUserSearch(); showHideModifySearchModal()" />
 	</div>
 
-	<div class="listWrapper" ng-repeat="listing in searchResults.flightListings">
+	<div class="listWrapper">
 
-		<div class="searchResultsListing" ng-repeat="item in listing.tripOption">
+		<div class="searchResultsListing" ng-repeat="listing in searchResults.flightListings">
 			<div class="whiteBackground">
 				<div class="dataWrapper">
 					<!--OUTBOUND---------------------------------------------------------------->
@@ -17,7 +17,7 @@
 						<div class="column">
 							<div class="label">Departing</div>
 							<div class="tripLabel" ng-show="isShown('roundtrip')">Outbound</div>
-							<div ng-repeat="segment in item.slice[0].segment">
+							<div ng-repeat="segment in listing.slice[0].segment">
 								<div ng-repeat="leg in segment.leg">
 									<div class="secondRow bold">{{leg.origin}}</div>
 									<div class="thirdRow">{{leg.cleanDepartureTime | date: 'h:mm a' }}</div>
@@ -31,7 +31,7 @@
 							<div class="tripLabel" ng-show="isShown('roundtrip')">
 								<br>
 							</div>
-							<div ng-repeat="segment in item.slice[0].segment">
+							<div ng-repeat="segment in listing.slice[0].segment">
 								<div ng-repeat="leg in segment.leg">
 									<div class="secondRow bold">{{leg.destination}}</div>
 									<div class="thirdRow">{{leg.cleanArrivalTime | date: 'h:mm a'}}</div>
@@ -45,7 +45,7 @@
 							<div class="tripLabel" ng-show="isShown('roundtrip')">
 								<br>
 							</div>
-							<div ng-repeat="segment in item.slice[0].segment">
+							<div ng-repeat="segment in listing.slice[0].segment">
 								<div class="secondRow bold">{{segment.flight.carrier}}</div>
 								<div class="thirdRow">{{segment.flight.number}}</div>
 								<div class="fourthRow">
@@ -59,7 +59,7 @@
 							<div class="tripLabel" ng-show="isShown('roundtrip')">
 								<br>
 							</div>
-							<div ng-repeat="segment in item.slice[0].segment">
+							<div ng-repeat="segment in listing.slice[0].segment">
 								<div class="secondRow">
 									<br>
 								</div>
@@ -79,7 +79,7 @@
 
 						<div class="column">
 							<div class="tripLabel">Return</div>
-							<div ng-repeat="segment in item.slice[1].segment">
+							<div ng-repeat="segment in listing.slice[1].segment">
 								<div ng-repeat="leg in segment.leg">
 									<div class="secondRow bold">{{leg.origin}}</div>
 									<div class="thirdRow">{{leg.cleanDepartureTime | date: 'h:mm a' }}</div>
@@ -92,7 +92,7 @@
 							<div class="tripLabel">
 								<br>
 							</div>
-							<div ng-repeat="segment in item.slice[1].segment">
+							<div ng-repeat="segment in listing.slice[1].segment">
 								<div ng-repeat="leg in segment.leg">
 									<div class="secondRow bold">{{leg.destination}}</div>
 									<div class="thirdRow">{{leg.cleanArrivalTime | date: 'h:mm a'}}</div>
@@ -105,7 +105,7 @@
 							<div class="tripLabel">
 								<br>
 							</div>
-							<div ng-repeat="segment in item.slice[1].segment">
+							<div ng-repeat="segment in listing.slice[1].segment">
 								<div class="secondRow bold">{{segment.flight.carrier}}</div>
 								<div class="thirdRow">{{segment.flight.number}}</div>
 								<div class="fourthRow">
@@ -118,7 +118,7 @@
 							<div class="tripLabel">
 								<br>
 							</div>
-							<div ng-repeat="segment in item.slice[1].segment">
+							<div ng-repeat="segment in listing.slice[1].segment">
 								<div class="secondRow">
 									<br>
 								</div>
@@ -132,14 +132,14 @@
 				</div>
 
 				<div class="rightSection">
-					<div class="column" ng-repeat="pricing in item.pricing">
+					<div class="column" ng-repeat="pricing in listing.pricing">
 						<div class="label">Passengers</div>
 						<div class="secondRow bold passengers">{{pricing.passengers.adultCount}}</div>
 					</div>
 
 					<div class="column">
 						<div class="label lastLabel">Price</div>
-						<div class="bigCell bold">{{item.saleTotal}}</div>
+						<div class="bigCell bold">{{listing.saleTotal}}</div>
 					</div>
 
 				</div>
@@ -174,7 +174,7 @@
 				<div class="originFilter">
 					<div class="smallFilterLabel">Origin</div>
 					<div class="chipSection">
-						<div class="airlineChip" ng-repeat="city in cities">{{city}}</div>
+						<div class="airlineChip" ng-repeat="city in searchResults.cities">{{city.name}}</div>
 					</div>
 				</div>
 
@@ -182,7 +182,7 @@
 				<div class="airlineFilter">
 					<div class="smallFilterLabel">Airline</div>
 					<div class="chipSection">
-						<div class="airlineChip" ng-repeat="airline in airlines">{{airline}}</div>
+						<div class="airlineChip" ng-repeat="airline in searchResults.airlines">{{airline.name}}</div>
 					</div>
 
 				</div>

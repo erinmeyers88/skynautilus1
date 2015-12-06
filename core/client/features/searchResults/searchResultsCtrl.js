@@ -6,12 +6,16 @@ angular.module("skyNautilus")
     //   $scope.searchResults = loadResults;
     // }();
     
-    // console.log($scope.searchResults);
+   
     
+    $scope.searchResults = flightSearchService.getFinalSearchResults();
     
-    flightSearchService.getSearchResultsFinal().then(function (response) {
-      $scope.searchResults = response;
-    });
+     console.log($scope.searchResults);
+    
+    // flightSearchService.getFinalSearchResults().then(function (response) {
+    //   $scope.searchResults = response;
+    // });
+    
     
     //Determines whether to show depart and return labels
     $scope.isShown = function (tripType) {

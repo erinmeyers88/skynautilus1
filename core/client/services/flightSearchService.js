@@ -2,12 +2,14 @@ angular.module("skyNautilus").service("flightSearchService", FlightSearchService
 
 function FlightSearchService($http, $state) {
 
+	var finalSearchResults = {};
+
 	///Search function////////////////////////////////////////////////////		
 	this.search = function (userInput) {
 
 		var origins = ["PDX", "LAX", "SFO"],
 			length = origins.length - 1,
-			index = 0,
+			index = 0;
 			searchResults = {
 				tripType: userInput.tripType,
 				cities: [],
@@ -23,11 +25,14 @@ function FlightSearchService($http, $state) {
 			
 			submitGoogleSearch(requestBody, userInput)
 				.then(function (response) {
+					console.log("Logging response:", response);
 					addToResults(response);
 					if (index < length) {
 						index++
 						find (index)							
 					} else {
+						finalSearchResults = searchResults;
+						console.log("Search results:", searchResults);
 						return searchResults;
 					} 
 				},
@@ -39,7 +44,7 @@ function FlightSearchService($http, $state) {
 		function addToResults (results) {			
 
 			// cities //
-			searchResults.cities.concat(results.header.city);
+			searchResults.cities = searchResults.cities.concat(results.header.city);
 			
 			//airlines//
 			
@@ -60,68 +65,73 @@ function FlightSearchService($http, $state) {
 				});
 			});
 			
-			searchResults.airlines.concat(results.header.carrier);
+			searchResults.airlines = searchResults.airlines.concat(results.header.carrier);
 			
 
 			
 			//Itineraries//
 			results.tripOptions.forEach(function (option1) {
 				option1.saleTotal = option1.saleTotal.replace("USD", "$");
-				delete listing.$$hashKey;
-				delete listing.id;
-				delete listing.kind;
-				delete listing.pricing;
+				delete option1.$$hashKey;
+				delete option1.id;
+				delete option1.kind;
+				// delete option1.pricing;
 				option1.slice.forEach(function (option2) {
-					delete item.kind;
-					delete item.duration;
+					delete option2.kind;
+					delete option2.duration;
 					option2.segment.forEach(function (option3) {
-						delete item2.$$hashKey;
-						delete item2.bookingCode;
-						delete item2.bookingCodeCount;
-						delete item2.cabin;
-						delete item2.connectionDuration;
-						delete item2.duration;
-						delete item2.id;
-						delete item2.kind;
-						delete item2.marriedSegmentGroup;
+						delete option3.$$hashKey;
+						delete option3.bookingCode;
+						delete option3.bookingCodeCount;
+						delete option3.cabin;
+						delete option3.connectionDuration;
+						
+						delete option3.id;
+						delete option3.kind;
+						delete option3.marriedSegmentGroup;
 						
 						var m = option3.duration % 60;
 						var h = (option3.duration - m) / 60;
 						option3.cleanDuration = h.toString() + ":" + (m < 10 ? "0" : "") + m.toString();
+						
+						delete option3.duration;
+						
 						option3.flight.carrier = option3.flight.carrier.replace(/AS|US|VX|B6|UA|WS|NK|F9/gi, function (code) {
 							return airlineCodes[code];
 						});
 						option3.leg.forEach(function (option4) {
-							delete item3.$$hashKey;
-							delete item3.aircraft;
-							delete item3.arrivalTime;
-							delete item3.departureTime;
-							delete item3.destinationTerminal;
-							delete item3.meal;
-							delete item3.duration;
-							delete item3.id;
-							delete item3.kind;
-							delete item3.mileage;
-							delete item3.onTimePerformance;
-							delete item3.secure;
+							delete option4.$$hashKey;
+							delete option4.aircraft;
+							
+							delete option4.destinationTerminal;
+							delete option4.meal;
+							
+							delete option4.id;
+							delete option4.kind;
+							delete option4.mileage;
+							delete option4.onTimePerformance;
+							delete option4.secure;
 								
 							option4.cleanDepartureTime = new Date(option4.departureTime);
 							option4.cleanArrivalTime = new Date(option4.arrivalTime);
 							var min = option4.duration % 60;
 							var hour = (option4.duration - min) / 60;
 							option4.cleanDuration = hour.toString() + ":" + (min < 10 ? "0" : "") + min.toString();
+							
+							delete option4.arrivalTime;
+							delete option4.departureTime;
+							delete option4.duration;
 						});
 					});
 				});
 			});
 			
-			searchResults.flightListings.concat(results.tripOptions);
-
+			searchResults.flightListings = searchResults.flightListings.concat(results.tripOptions);
 	}				
 	};	
 	
-	this.getSearchResultsFinal = function () {
-		
+	this.getFinalSearchResults = function () {
+		return finalSearchResults
 	};
 	
 	
