@@ -9,7 +9,7 @@
 
 	<div class="listWrapper">
 
-		<div class="searchResultsListing" ng-repeat="listing in searchResults.flightListings">
+		<div class="searchResultsListing" ng-repeat="listing in searchResults.flightListings track by $index">
 			<div class="whiteBackground">
 				<div class="dataWrapper">
 					<!--OUTBOUND---------------------------------------------------------------->
@@ -151,7 +151,7 @@
 
 			<div class="buttonWrapper">
 				<div class="column saveButtonDiv">
-					<input type="button" class="saveButton" value="Save to&#13;&#10;Trips" ng-click="showHideModal(); setSelectedItinerary(item)"
+					<input type="button" class="saveButton" value="Save to&#13;&#10;Trips" ng-click="showHideSaveModal(); setSelectedItinerary(listing)"
 					/>
 				</div>
 			</div>
@@ -162,10 +162,14 @@
 		</div>
 
 
-		<!---------------Filter-------------------->
+		
 
 
-		<div class="filterWrapper">
+		
+
+	</div>
+	<!---------------Filter-------------------->
+	<div class="filterWrapper">
 
 
 			<div class="filterLabel">Filter Search Results</div>
@@ -189,8 +193,6 @@
 
 			</div>
 		</div>
-
-	</div>
 </div>
 
 

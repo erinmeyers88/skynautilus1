@@ -75,7 +75,7 @@ angular.module("skyNautilus")
         return response;
       });
       
-      $scope.showHideModal();
+      $scope.showHideSaveModal();
       
     };
 

@@ -8,6 +8,8 @@ html, body {
 }
 
 
+
+
 /*#####################################
 ######## Menu #########
 #######################################*/
@@ -362,14 +364,16 @@ datepicker input {
      background-color: rgba(0, 0, 128, .5);
      font-family: Arial, Helvetica, sans-serif;
      font-size: 18px;
+     display: flex;
+     flex-direction: row;
+     justify-content: center;
 }
 
 .overlayInside {
      width: 500px;
      height: 300px;
-     position: absolute;
+     position: fixed;
      top: 200px;
-     margin: 0 auto;
      background-color: #fff;
      border: 5px solid rgb(0, 0, 128);
      border-radius: 5px;
@@ -379,6 +383,9 @@ datepicker input {
      flex-direction: column;
      justify-content: space-around;
      align-items: center;
+     top: 50%;
+     left: 50%;
+     transform: translate(-50%, -50%);
      
 }
 
@@ -453,13 +460,14 @@ datepicker input {
 	background-image: url("/shared/img/nautilus1.jpg");
 	background-repeat: repeat;
     height: auto;
+    overflow-y: auto;
 }
 
 .modifySearch {
     display: flex;
     flex-direction: row;
-    width: 250px;
-	position: fixed;
+    width: 270px;
+	position: absolute;
     right: 50px;
 	top: 100px;
 	justify-content: center;
@@ -705,11 +713,11 @@ div p {
 	display: flex;
 	flex-direction: column;
 	align-content: flex-start;
-	position: fixed;
+	position: absolute;
 	right: 50px;
 	top: 175px;
 	min-height: 300px;
-	width: 250px;
+	width: 270px;
     border: 1px solid #fff;
 	border-radius: 5px;
 	background-color: white;
@@ -767,7 +775,7 @@ div p {
 
 .airlineChip {
 	height: 30px;
-	width: 100px;
+	width: 125px;
 	margin: 0 auto;
 	background-color: rgb(0, 0, 128);
     color: #fff;

@@ -5,11 +5,19 @@ function FlightSearchService($http, $state) {
 	var finalSearchResults = {};
 
 	///Search function////////////////////////////////////////////////////		
+	
+	
+	function goToSearchResults () {
+			$state.go("searchresults");
+			console.log("Changing states");
+		};
+  
+	
 	this.search = function (userInput) {
 
 		var origins = ["PDX", "LAX", "SFO"],
 			length = origins.length - 1,
-			index = 0;
+			index = 0,
 			searchResults = {
 				tripType: userInput.tripType,
 				cities: [],
@@ -21,18 +29,19 @@ function FlightSearchService($http, $state) {
 					
 		function find (index) {
 			
-			var requestBody = JSON.stringify(buildRequestBody(origins[index], userInput));
+			var requestBody = angular.toJson(buildRequestBody(origins[index], userInput));
 			
 			submitGoogleSearch(requestBody, userInput)
 				.then(function (response) {
 					console.log("Logging response:", response);
 					addToResults(response);
 					if (index < length) {
-						index++
-						find (index)							
+						index++;
+						find (index);							
 					} else {
 						finalSearchResults = searchResults;
 						console.log("Search results:", searchResults);
+						goToSearchResults();
 						return searchResults;
 					} 
 				},

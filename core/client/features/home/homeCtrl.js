@@ -18,8 +18,8 @@ function HomeController ($scope, flightSearchService, $state) {
     };
     
     //Change to search results view///
-		$scope.goToSearchResults = function () {
-			$state.go("searchresults");
-			console.log("Changing states");
-		};
+	// 	$scope.goToSearchResults = function () {
+	// 		$state.go("searchresults");
+	// 		console.log("Changing states");
+	// 	};
   }
