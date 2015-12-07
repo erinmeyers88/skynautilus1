@@ -18,10 +18,10 @@ function HomeController ($scope, flightSearchService, $state) {
     };
     
 
-    //Shows or hides loading results modal
-    // $scope.showHideLoadResultsModal = function () {
-    //   var el = document.getElementById("loadModal");
-    //   el.style.visibility = (el.style.visibility == "visible") ? "hidden" : "visible";
-    // };
+    //Shows or hides login modal
+    $scope.showHideLoginModal = function () {
+      var el = document.getElementById("loginModal");
+      el.style.visibility = (el.style.visibility == "visible") ? "hidden" : "visible";
+    };
     
   }

@@ -7,8 +7,9 @@ var express = require('express'),
     methodOverride = require('method-override'),
     session = require('express-session'),
     morgan = require('morgan'),
-    config = require('./config');
-
+    config = require('./config'),
+    passport = require('passport'),
+    FacebookStrategy = require('passport-facebook').Strategy;
 
 
 module.exports = function () {
@@ -31,13 +32,22 @@ module.exports = function () {
     app.use(methodOverride());
 
     // cookies and session
-    // app.use(session({
-    //     saveUninitialized: true,
-    //     resave: true,
-    //     secret: config.sessionSecret
-    // }));
+    app.use(session({
+        saveUninitialized: true,
+        resave: true,
+        secret: config.sessionSecret
+    }));
 
 
+
+    //Passport
+    
+     require('./passport.js')(app);
+    
+    app.use(passport.initialize());
+    app.use(passport.session());
+  
+    
     // MIDDLEWARE THAT RUNS ONLY IN DEVELOPMENT
 
     // a logger so we can see activity in the console
@@ -48,7 +58,8 @@ module.exports = function () {
 
     // HERE WE CONFIGURE THE ROUTES
     require('../features/trip/trip.server.routes')(app);
-    // require('../features/user/user.server.routes')(app);
+    require('../features/user/user.server.routes')(app);
+    require('../features/auth/auth.server.routes')(app);
 
 
     // THIS WILL BE THE ROOT OF THE ANGULAR APP
