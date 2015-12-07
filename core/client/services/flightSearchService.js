@@ -11,9 +11,16 @@ function FlightSearchService($http, $state) {
 			$state.go("searchresults");
 			console.log("Changing states");
 		};
+		
+	function showHideLoadResultsModal () {
+      var el = document.getElementById("loadModal");
+      el.style.visibility = (el.style.visibility == "visible") ? "hidden" : "visible";
+    };
   
 	
 	this.search = function (userInput) {
+		
+		showHideLoadResultsModal();
 
 		var origins = ["PDX", "LAX", "SFO"],
 			length = origins.length - 1,

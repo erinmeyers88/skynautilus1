@@ -17,9 +17,11 @@ function HomeController ($scope, flightSearchService, $state) {
       // $scope.goToSearchResults();
     };
     
-    //Change to search results view///
-	// 	$scope.goToSearchResults = function () {
-	// 		$state.go("searchresults");
-	// 		console.log("Changing states");
-	// 	};
+
+    //Shows or hides loading results modal
+    // $scope.showHideLoadResultsModal = function () {
+    //   var el = document.getElementById("loadModal");
+    //   el.style.visibility = (el.style.visibility == "visible") ? "hidden" : "visible";
+    // };
+    
   }
